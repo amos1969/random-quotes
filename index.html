@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link href="css/style.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"/>
+    <title>Dave Ames' Random Quotation Page</title>
+    <script>
+        function getQuote() {
+                $.ajax({
+                    url: "https://quotesondesign.com/wp-json/posts?filter[orderby]=rand&filter[posts_per_page]=1&_jsonp=?",
+                    cache: false,
+                    dataType: 'jsonp',
+                    type: 'GET',
+                    success: function (data) {
+                        var content = data[0].content;
+                        var author = data[0].title;
+                        $(".message").html(content + author);
+                    }
+                });
+            }
+
+        $(document).ready(function() {
+            getQuote();
+
+            $('#getMessage').on('click', function() {
+                getQuote();
+            });
+        });
+    </script>
+
+</head>
+<body>
+<!-- Black with white text -->
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <a class="navbar-brand" href="#" target="_blank">
+        <img src="assets/DA.png" alt="Logo" style="width:40px; margin-right:20px;">
+        Dave Ames
+    </a>
+    <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+            <a class="nav-link" href="#home" target="_blank">Home</a>
+        </li>
+        <li class="nav-item active">
+            <a class="nav-link" href="#about" target="_blank">About</a>
+        </li>
+    </ul>
+</nav>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col"></div>
+        <div class="col-10" style="background-color: white;">
+            <div class="jumbotron jumbotron-fluid text-center">
+                <div class="row">
+                    <div class="col"></div>
+                    <div class="col-10 message"></div>
+                    <div class="col"></div>
+                </div>
+                <br><br>
+                <div class="row">
+                    <div class="col"></div>
+                    <div class="col-10">
+                        <button class="btn btn-primary" id="getMessage" style="padding: 10px;">
+                            Get Quote
+                        </button>
+                    <button class="btn btn-info" id="tweet" style="padding: 10px;">
+                            Tweet <i class="fa fa-twitter"></i>
+                        </button>
+                    </div>
+                    <div class="col"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col"></div>
+    </div>
+</div>
+
+<footer class="footer">
+    <div class="container-fluid text-center">
+        <span class="text-muted">&copy; Dave Ames 2018</span>
+    </div>
+</footer>
+
+
+
+</body>
+</html>
