@@ -24,12 +24,27 @@
                     }
                 });
             }
+        function tweetIt() {
+                var quote = $('.message').text();
+
+                var tweetQuote = encodeURIComponent(quote);
+
+                window.open('https://twitter.com/intent/tweet?hashtags=RandomQuotes,freecodecamp&text=' + tweetQuote);
+            }
+
+
 
         $(document).ready(function() {
             getQuote();
 
-            $('#getMessage').on('click', function() {
+            $('#getMessage').on('click', function(e) {
+                e.preventDefault();
                 getQuote();
+            });
+
+            $('#tweet').on('click', function(e) {
+                e.preventDefault();
+                tweetIt();
             });
         });
     </script>
@@ -52,11 +67,11 @@
     </ul>
 </nav>
 
-<div class="container-fluid">
+<div class="container-fluid main-page">
     <div class="row">
         <div class="col"></div>
-        <div class="col-10" style="background-color: white;">
-            <div class="jumbotron jumbotron-fluid text-center">
+        <div class="col-10">
+            <div class="jumbotron jumbotron-fluid bg-cover text-center">
                 <div class="row">
                     <div class="col"></div>
                     <div class="col-10 message"></div>
